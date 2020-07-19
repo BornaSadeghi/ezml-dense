@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {Component} from 'react';
 // import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import '../styles.css'
+
+
+function Node (y, r=50) {
+	return (
+		<svg>
+			<circle className="node" style={{cy:y+r, r:`${r}px`, borderRadius: "50%", width: "10%", paddingTop: "10%"}}></circle>
+		</svg>
+	)
+}
+
 
 function Line (x1, y1, x2, y2) {
 	return (
@@ -14,12 +24,20 @@ function Line (x1, y1, x2, y2) {
 }
 
 function Layer (numNodes) {
-	return {
-		numNodes: numNodes
+	// let height = document.getElementById("#nn").height()
+
+	return (
+	<>
+	{
+		[...Array(numNodes)].map((/*node*/) => (
+			Node(4)
+		))
 	}
+	</>
+	)
 }
 
-let layers = [
+let network = [
 	Layer(5),
 	Layer(5),
 	Layer(3),
@@ -27,21 +45,15 @@ let layers = [
 ]
 
 function NN () {
-	let contrast = 75;
+	let contrast = 50;
 	let brightness = 0;
 	// return Line (0,0,100,100)
 	return (
 		<Row id="nn">
 		{
-			layers.map((layer, index) => (
-				<Col style={{backgroundColor: `rgb(0,${(255-contrast)/2 + contrast/layers.length*(index) + brightness},0)`}}>
-					<svg className="layer" >
-					{
-						[...Array(layer.numNodes)].map((node) => (
-							<circle className="node" style={{/*display: "inline-block", */r:"50px", borderRadius: "50%", width: "10%", paddingTop: "10%"}}></circle>
-						))
-					}
-					</svg>
+			network.map((layer, index) => (
+				<Col style={{backgroundColor: `rgb(0,${(255-contrast)/2 + contrast/network.length*(index) + brightness},0)`}}>
+					<svg>{layer}</svg>
 				</Col>
 			))
 		}
