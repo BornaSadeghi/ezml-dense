@@ -21,6 +21,12 @@ html, body {
     height: 100px;
 }
 
+#options {
+    color:white;
+    display: flex;
+    justify-content: space-between;
+}
+
 #nn {
     width: 100%;
     height: 100%;

@@ -14,13 +14,20 @@ function Layer (numNodes) {
 
 // Using node counts for now instead of layers. Will implement more functionality into each layer.
 let network = [
-	40,
-	5,
-	3,
-	5,
+	4,
+	8,
 	3,
 	1
 ]
+
+/*
+Sequential([
+	Dense(40, activation="relu", input_dim=2),
+	Dense(20),
+    Dense(1)
+])
+
+*/
 
 function getShade (contrast, brightness, numLayers, index) {
     return `rgb(${(255-contrast)/2 + contrast/network.length*(index) + brightness},0,${(255-contrast)/2 + contrast/network.length*(index) + brightness})`
@@ -46,7 +53,14 @@ function NN () {
                      
                     <div className="layer-controls" style={{backgroundColor: getShade(contrast, brightness-10, network.length, index)}}>
 						<div className="layer-label">Layer Controls</div>
-						<input type="number" min="1" max="9999" value="3" placeholder="Number of nodes"></input>
+						<input type="number" min="1" max="9999" placeholder="Number of nodes"></input>
+						<select placeholder="Activation function">
+							<option>linear</option>
+							<option>sigmoid</option>
+							<option>softmax</option>
+							<option>relu</option>
+							<option>tanh</option>
+						</select>
                         <Button>
                             Submit
                         </Button>
